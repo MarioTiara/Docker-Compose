@@ -1,0 +1,16 @@
+version: '2.6'
+services:
+  ms-sql-server:
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "yourStrong(!)Password"
+      MSSQL_PID: Express
+    ports:
+      - "1433:1433"
+  colour-api:
+    build: .
+    environment:
+      DbServer: "ms-sql-server"
+    ports:
+      - "8080:80"
